@@ -1,6 +1,6 @@
 package com.fb.lab.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class HotelBooking {
 
@@ -10,15 +10,15 @@ public class HotelBooking {
 
     private String hotelName;
 
-    private LocalDateTime arrivalDate;
+    private LocalDate arrivalDate;
 
-    private LocalDateTime departureDate;
+    private LocalDate departureDate;
 
     public HotelBooking(Long hotelId,
                         String clientName,
                         String hotelName,
-                        LocalDateTime arrivalDate,
-                        LocalDateTime departureDate) {
+                        LocalDate arrivalDate,
+                        LocalDate departureDate) {
         this.hotelId = hotelId;
         this.clientName = clientName;
         this.hotelName = hotelName;
@@ -31,18 +31,18 @@ public class HotelBooking {
     }
 
     public String getClientName() {
-        return clientName;
+        return "'" + clientName + "'";
     }
 
     public String getHotelName() {
-        return hotelName;
+        return "'" + hotelName + "'";
     }
 
-    public LocalDateTime getArrivalDate() {
+    public LocalDate getArrivalDate() {
         return arrivalDate;
     }
 
-    public LocalDateTime getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 }

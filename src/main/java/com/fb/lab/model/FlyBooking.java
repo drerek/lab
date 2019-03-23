@@ -1,6 +1,6 @@
 package com.fb.lab.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class FlyBooking {
 
@@ -14,14 +14,14 @@ public class FlyBooking {
 
     private String toPlace;
 
-    private LocalDateTime flightDate;
+    private LocalDate flightDate;
 
     public FlyBooking(Long bookingId,
                       String clientName,
                       Integer flightNumber,
                       String fromPlace,
                       String toPlace,
-                      LocalDateTime flightDate){
+                      LocalDate flightDate) {
         this.bookingId = bookingId;
         this.clientName = clientName;
         this.flightNumber = flightNumber;
@@ -35,7 +35,7 @@ public class FlyBooking {
     }
 
     public String getClientName() {
-        return clientName;
+        return "'" + clientName + "'";
     }
 
     public Integer getFlightNumber() {
@@ -43,14 +43,14 @@ public class FlyBooking {
     }
 
     public String getFromPlace() {
-        return fromPlace;
+        return "'" + fromPlace + "'";
     }
 
     public String getToPlace() {
-        return toPlace;
+        return "'" + toPlace + "'";
     }
 
-    public LocalDateTime getFlightDate() {
+    public LocalDate getFlightDate() {
         return flightDate;
     }
 }
