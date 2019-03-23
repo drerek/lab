@@ -29,21 +29,14 @@ public class LabApplication implements CommandLineRunner {
 	@Autowired
 	public LabApplication(HelloMessageService helloService) {
 		this.helloService = helloService;
-
 	}
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) {
 		SpringApplication.run(LabApplication.class, args);
-		Optional<Connection> flightConnection = getConnection("localhost:5432/fly_booking",
-				"postgres",
-				"root");
-		Optional<Connection> hotelConnection = getConnection("localhost:5432/hotel_booking",
-				"postgres",
-				"root");
+	}
 
 	@Override
 	public void run(String... args) {
-
 		if (args.length > 0) {
 			log.debug("arg.length > 0, so hello+name");
 			log.info(helloService.getMessage(args[0]));
@@ -51,6 +44,13 @@ public class LabApplication implements CommandLineRunner {
 			log.debug("args.length == 0, so hello world");
 			log.info(helloService.getMessage());
 		}
+
+		Optional<Connection> flightConnection = getConnection("localhost:5432/fly_booking",
+					"postgres",
+					"root");
+		Optional<Connection> hotelConnection = getConnection("localhost:5432/hotel_booking",
+					"postgres",
+					"root");
 		FlyBooking flight = new FlyBooking(
 				1L,
 				"Bob",
@@ -69,11 +69,15 @@ public class LabApplication implements CommandLineRunner {
 		);
 
 		if(flightConnection.isPresent() && hotelConnection.isPresent()){
-            mainTransaction(flightConnection.get(),
-                        hotelConnection.get(),
-                        flight,
-                        hotel);
-        }
+			try {
+				mainTransaction(flightConnection.get(),
+                            hotelConnection.get(),
+                            flight,
+                            hotel);
+			} catch (SQLException e) {
+
+			}
+		}
 	}
 
 	private static void mainTransaction(Connection flightConnection,
